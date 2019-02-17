@@ -97,32 +97,30 @@ func (platform *GLFW) FramebufferSize() [2]float32 {
 	return [2]float32{float32(w), float32(h)}
 }
 
-// NewFrame marks the begin of a render pass. It forwards all current state to imgui.CurrentIO().
+// NewFrame marks the begin of a render pass. It forwards all current state to imgui IO.
 func (platform *GLFW) NewFrame() {
-	io := imgui.CurrentIO()
-
 	// Setup display size (every frame to accommodate for window resizing)
 	displaySize := platform.DisplaySize()
-	io.SetDisplaySize(imgui.Vec2{X: displaySize[0], Y: displaySize[1]})
+	platform.imguiIO.SetDisplaySize(imgui.Vec2{X: displaySize[0], Y: displaySize[1]})
 
 	// Setup time step
 	currentTime := glfw.GetTime()
 	if platform.time > 0 {
-		io.SetDeltaTime(float32(currentTime - platform.time))
+		platform.imguiIO.SetDeltaTime(float32(currentTime - platform.time))
 	}
 	platform.time = currentTime
 
 	// Setup inputs
 	if platform.window.GetAttrib(glfw.Focused) != 0 {
 		x, y := platform.window.GetCursorPos()
-		io.SetMousePosition(imgui.Vec2{X: float32(x), Y: float32(y)})
+		platform.imguiIO.SetMousePosition(imgui.Vec2{X: float32(x), Y: float32(y)})
 	} else {
-		io.SetMousePosition(imgui.Vec2{X: -math.MaxFloat32, Y: -math.MaxFloat32})
+		platform.imguiIO.SetMousePosition(imgui.Vec2{X: -math.MaxFloat32, Y: -math.MaxFloat32})
 	}
 
 	for i := 0; i < len(platform.mouseJustPressed); i++ {
 		down := platform.mouseJustPressed[i] || (platform.window.GetMouseButton(glfwButtonIDByIndex[i]) == glfw.Press)
-		io.SetMouseButtonDown(i, down)
+		platform.imguiIO.SetMouseButtonDown(i, down)
 		platform.mouseJustPressed[i] = false
 	}
 }
