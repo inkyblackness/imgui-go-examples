@@ -7,8 +7,8 @@ The project follows the basic concept of the examples of **Dear ImGui** by separ
 
 * `cmd` contains the main functions of the example applications.
 * `pkg` contains the reusable library components
-  * `platform` contains code for mouse/keyboard/gamepad inputs, cursor shape, timing, windowing.
-  * `renderer` contains code for creating the main font texture, rendering imgui draw data.
+  * `platforms` contains code for mouse/keyboard/gamepad inputs, cursor shape, timing, windowing.
+  * `renderers` contains code for creating the main font texture, rendering imgui draw data.
   * `demo` contains the common example code.
 
 ## License
