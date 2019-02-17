@@ -14,6 +14,7 @@ type GLFWClientAPI string
 
 // GLFWClientAPI constants
 const (
+	GLFWClientAPIOpenGL2 GLFWClientAPI = "OpenGL2"
 	GLFWClientAPIOpenGL3 GLFWClientAPI = "OpenGL3"
 )
 
@@ -37,6 +38,9 @@ func NewGLFW(io imgui.IO, clientAPI GLFWClientAPI) (*GLFW, error) {
 	}
 
 	switch clientAPI {
+	case GLFWClientAPIOpenGL2:
+		glfw.WindowHint(glfw.ContextVersionMajor, 2)
+		glfw.WindowHint(glfw.ContextVersionMinor, 1)
 	case GLFWClientAPIOpenGL3:
 		glfw.WindowHint(glfw.ContextVersionMajor, 3)
 		glfw.WindowHint(glfw.ContextVersionMinor, 2)
