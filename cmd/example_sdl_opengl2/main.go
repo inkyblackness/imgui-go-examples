@@ -1,3 +1,5 @@
+// +build sdl
+
 package main
 
 import (

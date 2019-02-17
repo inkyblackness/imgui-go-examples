@@ -17,6 +17,13 @@ The project follows the basic concept of the examples of **Dear ImGui** by separ
   * `renderers` contains code for creating the main font texture, rendering imgui draw data. For example using: [OpenGL](https://github.com/go-gl/gl) (both v2.1 (fixed pipe) and v3.2 (shaders)) 
   * `demo` contains the common example code.
 
+## Running examples
+
+Some platforms and/or renderers may require dedicated build flags to be passed.
+Each example comes with a separate `README.md` that describes how to run them.
+
+> Build flags are used in order to avoid compiling all the libraries at once.
+
 ## License
 
 The project is available under the terms of the **New BSD License** (see LICENSE file).

@@ -1,3 +1,5 @@
+// +build sdl
+
 package platforms
 
 import (

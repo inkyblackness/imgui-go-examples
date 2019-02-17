@@ -1,3 +1,5 @@
+// +build glfw
+
 package main
 
 import (
