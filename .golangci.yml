@@ -9,6 +9,7 @@ linters:
   disable:
     - gochecknoglobals
     - goimports # disabled because of so many false-positives with "imgui-go"
+    - gosec
 
 issues:
   exclude-use-default: false # disable filtering of defaults for better zero-issue policy

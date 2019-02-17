@@ -87,7 +87,7 @@ func (platform *GLFW) DisplaySize() [2]float32 {
 	return [2]float32{float32(w), float32(h)}
 }
 
-// DisplaySize returns the dimension of the framebuffer.
+// FramebufferSize returns the dimension of the framebuffer.
 func (platform *GLFW) FramebufferSize() [2]float32 {
 	w, h := platform.window.GetFramebufferSize()
 	return [2]float32{float32(w), float32(h)}

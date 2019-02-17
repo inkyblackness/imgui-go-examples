@@ -47,13 +47,14 @@ func (renderer *OpenGL3) Dispose() {
 	renderer.invalidateDeviceObjects()
 }
 
-// PreRender draws the requested
+// PreRender sets up the viewport and clears the framebuffer.
 func (renderer *OpenGL3) PreRender(displaySize [2]float32, clearColor [4]float32) {
 	gl.Viewport(0, 0, int32(displaySize[0]), int32(displaySize[1]))
 	gl.ClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3])
 	gl.Clear(gl.COLOR_BUFFER_BIT)
 }
 
+// Render translates the ImGui draw data to OpenGL3 commands.
 func (renderer *OpenGL3) Render(displaySize [2]float32, framebufferSize [2]float32, drawData imgui.DrawData) {
 	// Avoid rendering when minimized, scale coordinates for retina displays (screen coordinates != framebuffer coordinates)
 	displayWidth, displayHeight := displaySize[0], displaySize[1]
@@ -62,8 +63,8 @@ func (renderer *OpenGL3) Render(displaySize [2]float32, framebufferSize [2]float
 		return
 	}
 	drawData.ScaleClipRects(imgui.Vec2{
-		X: float32(fbWidth) / float32(displayWidth),
-		Y: float32(fbHeight) / float32(displayHeight),
+		X: fbWidth / displayWidth,
+		Y: fbHeight / displayHeight,
 	})
 
 	// Backup GL state
@@ -117,8 +118,8 @@ func (renderer *OpenGL3) Render(displaySize [2]float32, framebufferSize [2]float
 	// Setup viewport, orthographic projection matrix
 	gl.Viewport(0, 0, int32(fbWidth), int32(fbHeight))
 	orthoProjection := [4][4]float32{
-		{2.0 / float32(displayWidth), 0.0, 0.0, 0.0},
-		{0.0, 2.0 / float32(-displayHeight), 0.0, 0.0},
+		{2.0 / displayWidth, 0.0, 0.0, 0.0},
+		{0.0, 2.0 / -displayHeight, 0.0, 0.0},
 		{0.0, 0.0, -1.0, 0.0},
 		{-1.0, 1.0, 0.0, 1.0},
 	}
