@@ -47,9 +47,8 @@ func (renderer *OpenGL3) Dispose() {
 	renderer.invalidateDeviceObjects()
 }
 
-// PreRender sets up the viewport and clears the framebuffer.
-func (renderer *OpenGL3) PreRender(displaySize [2]float32, clearColor [4]float32) {
-	gl.Viewport(0, 0, int32(displaySize[0]), int32(displaySize[1]))
+// PreRender clears the framebuffer.
+func (renderer *OpenGL3) PreRender(clearColor [4]float32) {
 	gl.ClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3])
 	gl.Clear(gl.COLOR_BUFFER_BIT)
 }
@@ -116,6 +115,8 @@ func (renderer *OpenGL3) Render(displaySize [2]float32, framebufferSize [2]float
 	gl.PolygonMode(gl.FRONT_AND_BACK, gl.FILL)
 
 	// Setup viewport, orthographic projection matrix
+	// Our visible imgui space lies from draw_data->DisplayPos (top left) to draw_data->DisplayPos+data_data->DisplaySize (bottom right).
+	// DisplayMin is typically (0,0) for single viewport apps.
 	gl.Viewport(0, 0, int32(fbWidth), int32(fbHeight))
 	orthoProjection := [4][4]float32{
 		{2.0 / displayWidth, 0.0, 0.0, 0.0},

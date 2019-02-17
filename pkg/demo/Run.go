@@ -26,7 +26,7 @@ type Platform interface {
 // Renderer covers rendering imgui draw data.
 type Renderer interface {
 	// PreRender causes the display buffer to be prepared for new output.
-	PreRender(displaySize [2]float32, clearColor [4]float32)
+	PreRender(clearColor [4]float32)
 	// Render draws the provided imgui draw data.
 	Render(displaySize [2]float32, framebufferSize [2]float32, drawData imgui.DrawData)
 }
@@ -89,16 +89,13 @@ func Run(p Platform, r Renderer) {
 		}
 
 		// Rendering
-		imgui.Render()
+		imgui.Render() // This call only creates the draw data list. Actual rendering to framebuffer is done below.
 
-		displaySize := p.DisplaySize()
-		framebufferSize := p.FramebufferSize()
-
-		r.PreRender(displaySize, clearColor)
+		r.PreRender(clearColor)
 		// A this point, the application could perform its own rendering...
 		// app.RenderScene()
 
-		r.Render(displaySize, framebufferSize, imgui.RenderedDrawData())
+		r.Render(p.DisplaySize(), p.FramebufferSize(), imgui.RenderedDrawData())
 		p.PostRender()
 
 		// sleep to avoid 100% CPU usage for this demo
