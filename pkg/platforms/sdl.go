@@ -49,6 +49,23 @@ func NewSDL(io imgui.IO, clientAPI SDLClientAPI) (*SDL, error) {
 	}
 	platform.setKeyMapping()
 
+	switch clientAPI {
+	case SDLClientAPIOpenGL2:
+		_ = sdl.GLSetAttribute(sdl.GL_CONTEXT_MAJOR_VERSION, 2)
+		_ = sdl.GLSetAttribute(sdl.GL_CONTEXT_MINOR_VERSION, 1)
+	case SDLClientAPIOpenGL3:
+		_ = sdl.GLSetAttribute(sdl.GL_CONTEXT_MAJOR_VERSION, 3)
+		_ = sdl.GLSetAttribute(sdl.GL_CONTEXT_MINOR_VERSION, 2)
+		_ = sdl.GLSetAttribute(sdl.GL_CONTEXT_FLAGS, sdl.GL_CONTEXT_FORWARD_COMPATIBLE_FLAG)
+		_ = sdl.GLSetAttribute(sdl.GL_CONTEXT_PROFILE_MASK, sdl.GL_CONTEXT_PROFILE_CORE)
+	default:
+		platform.Dispose()
+		return nil, fmt.Errorf("unsupported ClientAPI: <%s>", clientAPI)
+	}
+	_ = sdl.GLSetAttribute(sdl.GL_DOUBLEBUFFER, 1)
+	_ = sdl.GLSetAttribute(sdl.GL_DEPTH_SIZE, 24)
+	_ = sdl.GLSetAttribute(sdl.GL_STENCIL_SIZE, 8)
+
 	glContext, err := window.GLCreateContext()
 	if err != nil {
 		platform.Dispose()
@@ -59,6 +76,8 @@ func NewSDL(io imgui.IO, clientAPI SDLClientAPI) (*SDL, error) {
 		platform.Dispose()
 		return nil, fmt.Errorf("failed to set current OpenGL context: %v", err)
 	}
+
+	_ = sdl.GLSetSwapInterval(1)
 
 	return platform, nil
 }
