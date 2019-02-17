@@ -23,3 +23,7 @@ issues:
 linters-settings:
   lll:
     line-length: 160
+
+service:
+  prepare:
+    - apt-get update && apt-get install -y mesa-utils mesa-common-dev libsdl2-dev libglfw3-dev
