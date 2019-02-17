@@ -10,7 +10,7 @@ It provides a reference implementation on how to use and integrate ImGui.
 The project follows the basic concept of the examples of **Dear ImGui** by separating platform and renderer bindings from the example applications that wire them together in compatible constellations.
 
 * `cmd` contains the main functions of the example applications. They typically combine a platform with a renderer.
-* `pkg` contains the reusable library components
+* `internal` contains the reusable library components
   * `platforms` contains code for mouse/keyboard/gamepad inputs, cursor shape, timing, windowing. For example: [GLFW3](https://github.com/go-gl/glfw) and [SDL2](https://github.com/veandco/go-sdl2). 
   * `renderers` contains code for creating the main font texture, rendering imgui draw data. For example: [OpenGL](https://github.com/go-gl/gl) (both v2.1 (fixed pipe) and v3.2 (shaders)) 
   * `demo` contains the common example code.

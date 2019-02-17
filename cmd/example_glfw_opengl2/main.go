@@ -6,9 +6,9 @@ import (
 
 	"github.com/inkyblackness/imgui-go"
 
-	"github.com/inkyblackness/imgui-go-examples/pkg/demo"
-	"github.com/inkyblackness/imgui-go-examples/pkg/platforms"
-	"github.com/inkyblackness/imgui-go-examples/pkg/renderers"
+	"github.com/inkyblackness/imgui-go-examples/internal/demo"
+	"github.com/inkyblackness/imgui-go-examples/internal/platforms"
+	"github.com/inkyblackness/imgui-go-examples/internal/renderers"
 )
 
 func main() {
