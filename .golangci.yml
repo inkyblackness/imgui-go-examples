@@ -1,5 +1,8 @@
 run:
   deadline: 5m
+  build-tags:
+    - glfw
+    - sdl
 
 linters:
   enable-all: true
