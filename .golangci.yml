@@ -30,5 +30,7 @@ linters-settings:
 service:
   prepare:
     - apt-get update && apt-get install -y mesa-utils mesa-common-dev libsdl2-dev libglfw3-dev
+    # the following a fix as per https://github.com/golangci/golangci/issues/29#issuecomment-460649402 -- missing vendor libraries
     - GO111MODULE=on go mod vendor
+    # the following a fix as per https://github.com/esimov/diagram/issues/7#issuecomment-443186458 -- glfw library broken through vendoring
     - GO111MODULE=off go get -u github.com/go-gl/glfw/v3.2/glfw/glfw; cp -R $GOPATH/src/github.com/go-gl/glfw/v3.2/glfw/glfw vendor/github.com/go-gl/glfw/v3.2/glfw/glfw
