@@ -27,8 +27,10 @@ func main() {
 
 	renderer, err := renderers.NewOpenGL3(io)
 	if err != nil {
+		_, _ = fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(-1)
 	}
+	defer renderer.Dispose()
 
 	demo.Run(platform, renderer)
 }
