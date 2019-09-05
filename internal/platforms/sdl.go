@@ -3,6 +3,7 @@
 package platforms
 
 import (
+	"errors"
 	"fmt"
 	"runtime"
 
@@ -224,4 +225,13 @@ func (platform *SDL) processEvent(event sdl.Event) {
 		platform.imguiIO.KeyCtrl(modState&sdl.KMOD_LCTRL, modState&sdl.KMOD_RCTRL)
 		platform.imguiIO.KeyAlt(modState&sdl.KMOD_LALT, modState&sdl.KMOD_RALT)
 	}
+}
+
+// ClipboardText returns the current clipboard text, if available.
+func (platform *SDL) ClipboardText() (string, error) {
+	return nil, errors.New("not implemented")
+}
+
+// SetClipboardText sets the text as the current clipboard text.
+func (platform *SDL) SetClipboardText(text string) {
 }

@@ -206,3 +206,13 @@ func (platform *GLFW) keyChange(window *glfw.Window, key glfw.Key, scancode int,
 func (platform *GLFW) charChange(window *glfw.Window, char rune) {
 	platform.imguiIO.AddInputCharacters(string(char))
 }
+
+// ClipboardText returns the current clipboard text, if available.
+func (platform *GLFW) ClipboardText() (string, error) {
+	return platform.window.GetClipboardString()
+}
+
+// SetClipboardText sets the text as the current clipboard text.
+func (platform *GLFW) SetClipboardText(text string) {
+	platform.window.SetClipboardString(text)
+}
