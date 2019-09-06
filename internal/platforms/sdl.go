@@ -227,7 +227,7 @@ func (platform *SDL) updateKeyModifier() {
 			lResult = lKey
 		}
 		if (modState & rMask) != 0 {
-			lResult = rKey
+			rResult = rKey
 		}
 		return
 	}
