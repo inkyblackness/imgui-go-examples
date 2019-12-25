@@ -14,6 +14,9 @@ linters:
     - goimports # disabled because of so many false-positives with "imgui-go"
     - gosec
     - maligned
+    - funlen # disabled because of example code. While people will probably tend to duplicate this, they'll handle it on their own.
+    - godox # for the deliberate TODO tags
+    - wsl # this one became too pedantic and with a different style than I would.
 
 issues:
   exclude-use-default: false # disable filtering of defaults for better zero-issue policy
