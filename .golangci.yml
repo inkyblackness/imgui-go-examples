@@ -28,6 +28,7 @@ linters-settings:
     line-length: 160
 
 service:
+  golangci-lint-version: 1.21.x
   prepare:
     - apt-get update && apt-get install -y mesa-utils mesa-common-dev libsdl2-dev libglfw3-dev
     # the following a fix as per https://github.com/golangci/golangci/issues/29#issuecomment-460649402 -- missing vendor libraries
