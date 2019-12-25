@@ -7,3 +7,5 @@ require (
 	github.com/inkyblackness/imgui-go v1.10.0
 	github.com/veandco/go-sdl2 v0.3.1
 )
+
+go 1.13
