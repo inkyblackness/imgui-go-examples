@@ -36,8 +36,8 @@ func (renderer *OpenGL2) Dispose() {
 }
 
 // PreRender clears the framebuffer.
-func (renderer *OpenGL2) PreRender(clearColor [4]float32) {
-	gl.ClearColor(clearColor[0], clearColor[1], clearColor[2], clearColor[3])
+func (renderer *OpenGL2) PreRender(clearColor [3]float32) {
+	gl.ClearColor(clearColor[0], clearColor[1], clearColor[2], 1.0)
 	gl.Clear(gl.COLOR_BUFFER_BIT)
 }
 

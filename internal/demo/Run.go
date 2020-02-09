@@ -42,7 +42,7 @@ func (board clipboard) SetText(text string) {
 // Renderer covers rendering imgui draw data.
 type Renderer interface {
 	// PreRender causes the display buffer to be prepared for new output.
-	PreRender(clearColor [4]float32)
+	PreRender(clearColor [3]float32)
 	// Render draws the provided imgui draw data.
 	Render(displaySize [2]float32, framebufferSize [2]float32, drawData imgui.DrawData)
 }
@@ -53,7 +53,7 @@ func Run(p Platform, r Renderer) {
 	imgui.CurrentIO().SetClipboard(clipboard{platform: p})
 
 	showDemoWindow := false
-	clearColor := [4]float32{0.0, 0.0, 0.0, 1.0}
+	clearColor := [3]float32{0.0, 0.0, 0.0}
 	f := float32(0.0)
 	counter := 0
 	showAnotherWindow := false
@@ -81,7 +81,7 @@ func Run(p Platform, r Renderer) {
 			imgui.Checkbox("Another Window", &showAnotherWindow)
 
 			imgui.SliderFloat("float", &f, 0.0, 1.0) // Edit one float using a slider from 0.0f to 1.0f
-			// TODO add example of ColorEdit3 for clearColor
+			imgui.ColorEdit3("clear color", &clearColor)
 
 			if imgui.Button("Button") { // Buttons return true when clicked (most widgets return true when edited/activated)
 				counter++
@@ -89,7 +89,8 @@ func Run(p Platform, r Renderer) {
 			imgui.SameLine()
 			imgui.Text(fmt.Sprintf("counter = %d", counter))
 
-			// TODO add text of FPS based on IO.Framerate()
+			imgui.Text(fmt.Sprintf("Application average %.3f ms/frame (%.1f FPS)",
+				1000.0/imgui.CurrentIO().Framerate(), imgui.CurrentIO().Framerate()))
 
 			imgui.End()
 		}
