@@ -65,23 +65,16 @@ func Run(p Platform, r Renderer) {
 		p.NewFrame()
 		imgui.NewFrame()
 
-		// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()!
-		// You can browse its code to learn more about Dear ImGui!).
-		if showDemoWindow {
-			imgui.ShowDemoWindow(&showDemoWindow)
-		}
-
-		// 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+		// 1. Show a simple window.
+		// Tip: if we don't call imgui.Begin()/imgui.End() the widgets automatically appears in a window called "Debug".
 		{
-			imgui.Begin("Hello, world!") // Create a window called "Hello, world!" and append into it.
-
-			imgui.Text("This is some useful text.") // Display some text
+			imgui.Text("ภาษาไทย测试조선말")                   // To display these, you'll need to register a compatible font
+			imgui.Text("Hello, world!")                  // Display some text
+			imgui.SliderFloat("float", &f, 0.0, 1.0)     // Edit 1 float using a slider from 0.0f to 1.0f
+			imgui.ColorEdit3("clear color", &clearColor) // Edit 3 floats representing a color
 
 			imgui.Checkbox("Demo Window", &showDemoWindow) // Edit bools storing our window open/close state
 			imgui.Checkbox("Another Window", &showAnotherWindow)
-
-			imgui.SliderFloat("float", &f, 0.0, 1.0) // Edit one float using a slider from 0.0f to 1.0f
-			imgui.ColorEdit3("clear color", &clearColor)
 
 			if imgui.Button("Button") { // Buttons return true when clicked (most widgets return true when edited/activated)
 				counter++
@@ -91,20 +84,27 @@ func Run(p Platform, r Renderer) {
 
 			imgui.Text(fmt.Sprintf("Application average %.3f ms/frame (%.1f FPS)",
 				1000.0/imgui.CurrentIO().Framerate(), imgui.CurrentIO().Framerate()))
-
-			imgui.End()
 		}
 
-		// 3. Show another simple window.
+		// 2. Show another simple window. In most cases you will use an explicit Begin/End pair to name your windows.
 		if showAnotherWindow {
 			// Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
 			imgui.BeginV("Another window", &showAnotherWindow, 0)
-
 			imgui.Text("Hello from another window!")
 			if imgui.Button("Close Me") {
 				showAnotherWindow = false
 			}
 			imgui.End()
+		}
+
+		// 3. Show the ImGui demo window. Most of the sample code is in imgui.ShowDemoWindow().
+		// Read its code to learn more about Dear ImGui!
+		if showDemoWindow {
+			// Normally user code doesn't need/want to call this because positions are saved in .ini file anyway.
+			// Here we just want to make the demo initial state a bit more friendly!
+			imgui.SetNextWindowPosV(imgui.Vec2{X: 650, Y: 20}, imgui.ConditionFirstUseEver, imgui.Vec2{})
+
+			imgui.ShowDemoWindow(&showDemoWindow)
 		}
 
 		// Rendering
