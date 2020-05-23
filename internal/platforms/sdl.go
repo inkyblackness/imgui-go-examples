@@ -13,7 +13,7 @@ import (
 // SDLClientAPI identifies the render system that shall be initialized.
 type SDLClientAPI string
 
-// SDLClientAPI constants
+// This is a list of SDLClientAPI constants.
 const (
 	SDLClientAPIOpenGL2 SDLClientAPI = "OpenGL2"
 	SDLClientAPIOpenGL3 SDLClientAPI = "OpenGL3"
@@ -36,13 +36,13 @@ func NewSDL(io imgui.IO, clientAPI SDLClientAPI) (*SDL, error) {
 
 	err := sdl.Init(sdl.INIT_VIDEO)
 	if err != nil {
-		return nil, fmt.Errorf("failed to initialize SDL2: %v", err)
+		return nil, fmt.Errorf("failed to initialize SDL2: %w", err)
 	}
 
 	window, err := sdl.CreateWindow("ImGui-Go SDL2+"+string(clientAPI)+" example", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED, 1280, 720, sdl.WINDOW_OPENGL)
 	if err != nil {
 		sdl.Quit()
-		return nil, fmt.Errorf("failed to create window: %v", err)
+		return nil, fmt.Errorf("failed to create window: %w", err)
 	}
 
 	platform := &SDL{
@@ -62,7 +62,7 @@ func NewSDL(io imgui.IO, clientAPI SDLClientAPI) (*SDL, error) {
 		_ = sdl.GLSetAttribute(sdl.GL_CONTEXT_PROFILE_MASK, sdl.GL_CONTEXT_PROFILE_CORE)
 	default:
 		platform.Dispose()
-		return nil, fmt.Errorf("unsupported ClientAPI: <%s>", clientAPI)
+		return nil, ErrUnsupportedClientAPI
 	}
 	_ = sdl.GLSetAttribute(sdl.GL_DOUBLEBUFFER, 1)
 	_ = sdl.GLSetAttribute(sdl.GL_DEPTH_SIZE, 24)
@@ -71,12 +71,12 @@ func NewSDL(io imgui.IO, clientAPI SDLClientAPI) (*SDL, error) {
 	glContext, err := window.GLCreateContext()
 	if err != nil {
 		platform.Dispose()
-		return nil, fmt.Errorf("failed to create OpenGL context: %v", err)
+		return nil, fmt.Errorf("failed to create OpenGL context: %w", err)
 	}
 	err = window.GLMakeCurrent(glContext)
 	if err != nil {
 		platform.Dispose()
-		return nil, fmt.Errorf("failed to set current OpenGL context: %v", err)
+		return nil, fmt.Errorf("failed to set current OpenGL context: %w", err)
 	}
 
 	_ = sdl.GLSetSwapInterval(1)

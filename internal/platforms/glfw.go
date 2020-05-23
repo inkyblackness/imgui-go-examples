@@ -14,7 +14,7 @@ import (
 // GLFWClientAPI identifies the render system that shall be initialized.
 type GLFWClientAPI string
 
-// GLFWClientAPI constants
+// This is a list of GLFWClientAPI constants.
 const (
 	GLFWClientAPIOpenGL2 GLFWClientAPI = "OpenGL2"
 	GLFWClientAPIOpenGL3 GLFWClientAPI = "OpenGL3"
@@ -36,7 +36,7 @@ func NewGLFW(io imgui.IO, clientAPI GLFWClientAPI) (*GLFW, error) {
 
 	err := glfw.Init()
 	if err != nil {
-		return nil, fmt.Errorf("failed to initialize glfw: %v", err)
+		return nil, fmt.Errorf("failed to initialize glfw: %w", err)
 	}
 
 	switch clientAPI {
@@ -50,13 +50,13 @@ func NewGLFW(io imgui.IO, clientAPI GLFWClientAPI) (*GLFW, error) {
 		glfw.WindowHint(glfw.OpenGLForwardCompatible, 1)
 	default:
 		glfw.Terminate()
-		return nil, fmt.Errorf("unsupported ClientAPI: <%s>", clientAPI)
+		return nil, ErrUnsupportedClientAPI
 	}
 
 	window, err := glfw.CreateWindow(1280, 720, "ImGui-Go GLFW+"+string(clientAPI)+" example", nil, nil)
 	if err != nil {
 		glfw.Terminate()
-		return nil, fmt.Errorf("failed to create window: %v", err)
+		return nil, fmt.Errorf("failed to create window: %w", err)
 	}
 	window.MakeContextCurrent()
 	glfw.SwapInterval(1)

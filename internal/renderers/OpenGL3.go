@@ -31,7 +31,7 @@ type OpenGL3 struct {
 func NewOpenGL3(io imgui.IO) (*OpenGL3, error) {
 	err := gl.Init()
 	if err != nil {
-		return nil, fmt.Errorf("failed to initialize OpenGL: %v", err)
+		return nil, fmt.Errorf("failed to initialize OpenGL: %w", err)
 	}
 
 	renderer := &OpenGL3{

@@ -20,7 +20,7 @@ type OpenGL2 struct {
 func NewOpenGL2(io imgui.IO) (*OpenGL2, error) {
 	err := gl.Init()
 	if err != nil {
-		return nil, fmt.Errorf("failed to initialize OpenGL: %v", err)
+		return nil, fmt.Errorf("failed to initialize OpenGL: %w", err)
 	}
 
 	renderer := &OpenGL2{
