@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Download libraries
+      - name: Install libraries
         run: |
           sudo apt-get update
           sudo apt-get install -y mesa-utils mesa-common-dev libsdl2-dev libglfw3-dev
