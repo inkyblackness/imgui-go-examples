@@ -1,5 +1,5 @@
-// Package demo contains the core logic of the demo.
-// The Run() function demonstrates how a typical application would create a UI.
-// The function herein is not concerned about technology-specific things, such as
-// which abstraction library or which drawing interface is used.
+// Package demo contains the ported code of imgui_demo.cpp .
+// This package is intended both to showcase what ImGui can provide, as well as
+// what has actually been wrapped.
+// The visible part should be matched as closely as possible - the code only in spirit.
 package demo

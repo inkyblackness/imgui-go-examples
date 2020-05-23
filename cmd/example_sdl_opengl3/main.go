@@ -8,7 +8,7 @@ import (
 
 	"github.com/inkyblackness/imgui-go/v2"
 
-	"github.com/inkyblackness/imgui-go-examples/internal/demo"
+	"github.com/inkyblackness/imgui-go-examples/internal/example"
 	"github.com/inkyblackness/imgui-go-examples/internal/platforms"
 	"github.com/inkyblackness/imgui-go-examples/internal/renderers"
 )
@@ -32,5 +32,5 @@ func main() {
 	}
 	defer renderer.Dispose()
 
-	demo.Run(platform, renderer)
+	example.Run(platform, renderer)
 }

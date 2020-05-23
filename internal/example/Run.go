@@ -1,10 +1,12 @@
-package demo
+package example
 
 import (
 	"fmt"
 	"time"
 
 	"github.com/inkyblackness/imgui-go/v2"
+
+	"github.com/inkyblackness/imgui-go-examples/internal/demo"
 )
 
 // Platform covers mouse/keyboard/gamepad inputs, cursor shape, timing, windowing.
@@ -58,6 +60,7 @@ func Run(p Platform, r Renderer) {
 	imgui.CurrentIO().SetClipboard(clipboard{platform: p})
 
 	showDemoWindow := false
+	showGoDemoWindow := false
 	clearColor := [3]float32{0.0, 0.0, 0.0}
 	f := float32(0)
 	counter := 0
@@ -79,6 +82,7 @@ func Run(p Platform, r Renderer) {
 			imgui.ColorEdit3("clear color", &clearColor) // Edit 3 floats representing a color
 
 			imgui.Checkbox("Demo Window", &showDemoWindow) // Edit bools storing our window open/close state
+			imgui.Checkbox("Go Demo Window", &showGoDemoWindow)
 			imgui.Checkbox("Another Window", &showAnotherWindow)
 
 			if imgui.Button("Button") { // Buttons return true when clicked (most widgets return true when edited/activated)
@@ -112,6 +116,9 @@ func Run(p Platform, r Renderer) {
 			imgui.SetNextWindowPosV(imgui.Vec2{X: demoX, Y: demoY}, imgui.ConditionFirstUseEver, imgui.Vec2{})
 
 			imgui.ShowDemoWindow(&showDemoWindow)
+		}
+		if showGoDemoWindow {
+			demo.Show(&showGoDemoWindow)
 		}
 
 		// Rendering
