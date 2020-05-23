@@ -96,7 +96,8 @@ func (renderer *OpenGL2) Render(displaySize [2]float32, framebufferSize [2]float
 	indexSize := imgui.IndexBufferLayout()
 
 	drawType := gl.UNSIGNED_SHORT
-	if indexSize == 4 {
+	const bytesPerUint32 = 4
+	if indexSize == bytesPerUint32 {
 		drawType = gl.UNSIGNED_INT
 	}
 

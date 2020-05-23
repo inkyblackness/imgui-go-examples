@@ -53,7 +53,7 @@ func NewGLFW(io imgui.IO, clientAPI GLFWClientAPI) (*GLFW, error) {
 		return nil, ErrUnsupportedClientAPI
 	}
 
-	window, err := glfw.CreateWindow(1280, 720, "ImGui-Go GLFW+"+string(clientAPI)+" example", nil, nil)
+	window, err := glfw.CreateWindow(windowWidth, windowHeight, "ImGui-Go GLFW+"+string(clientAPI)+" example", nil, nil)
 	if err != nil {
 		glfw.Terminate()
 		return nil, fmt.Errorf("failed to create window: %w", err)
@@ -165,15 +165,15 @@ func (platform *GLFW) installCallbacks() {
 }
 
 var glfwButtonIndexByID = map[glfw.MouseButton]int{
-	glfw.MouseButton1: 0,
-	glfw.MouseButton2: 1,
-	glfw.MouseButton3: 2,
+	glfw.MouseButton1: mouseButtonPrimary,
+	glfw.MouseButton2: mouseButtonSecondary,
+	glfw.MouseButton3: mouseButtonTertiary,
 }
 
 var glfwButtonIDByIndex = map[int]glfw.MouseButton{
-	0: glfw.MouseButton1,
-	1: glfw.MouseButton2,
-	2: glfw.MouseButton3,
+	mouseButtonPrimary:   glfw.MouseButton1,
+	mouseButtonSecondary: glfw.MouseButton2,
+	mouseButtonTertiary:  glfw.MouseButton3,
 }
 
 func (platform *GLFW) mouseButtonChange(window *glfw.Window, rawButton glfw.MouseButton, action glfw.Action, mods glfw.ModifierKey) {

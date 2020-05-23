@@ -27,7 +27,7 @@ type SDL struct {
 	shouldStop bool
 
 	time        uint64
-	buttonsDown [3]bool
+	buttonsDown [mouseButtonCount]bool
 }
 
 // NewSDL attempts to initialize an SDL context.
@@ -39,7 +39,8 @@ func NewSDL(io imgui.IO, clientAPI SDLClientAPI) (*SDL, error) {
 		return nil, fmt.Errorf("failed to initialize SDL2: %w", err)
 	}
 
-	window, err := sdl.CreateWindow("ImGui-Go SDL2+"+string(clientAPI)+" example", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED, 1280, 720, sdl.WINDOW_OPENGL)
+	window, err := sdl.CreateWindow("ImGui-Go SDL2+"+string(clientAPI)+" example",
+		sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED, windowWidth, windowHeight, sdl.WINDOW_OPENGL)
 	if err != nil {
 		sdl.Quit()
 		return nil, fmt.Errorf("failed to create window: %w", err)
@@ -129,7 +130,8 @@ func (platform *SDL) NewFrame() {
 	if platform.time > 0 {
 		platform.imguiIO.SetDeltaTime(float32(currentTime-platform.time) / float32(frequency))
 	} else {
-		platform.imguiIO.SetDeltaTime(1.0 / 60.0)
+		const fallbackDelta = 1.0 / 60.0
+		platform.imguiIO.SetDeltaTime(fallbackDelta)
 	}
 	platform.time = currentTime
 
@@ -200,11 +202,11 @@ func (platform *SDL) processEvent(event sdl.Event) {
 		buttonEvent := event.(*sdl.MouseButtonEvent)
 		switch buttonEvent.Button {
 		case sdl.BUTTON_LEFT:
-			platform.buttonsDown[0] = true
+			platform.buttonsDown[mouseButtonPrimary] = true
 		case sdl.BUTTON_RIGHT:
-			platform.buttonsDown[1] = true
+			platform.buttonsDown[mouseButtonSecondary] = true
 		case sdl.BUTTON_MIDDLE:
-			platform.buttonsDown[2] = true
+			platform.buttonsDown[mouseButtonTertiary] = true
 		}
 	case sdl.TEXTINPUT:
 		inputEvent := event.(*sdl.TextInputEvent)
