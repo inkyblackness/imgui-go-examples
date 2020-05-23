@@ -31,7 +31,7 @@ type OpenGL3 struct {
 func NewOpenGL3(io imgui.IO) (*OpenGL3, error) {
 	err := gl.Init()
 	if err != nil {
-		return nil, fmt.Errorf("failed to initialize OpenGL: %v", err)
+		return nil, fmt.Errorf("failed to initialize OpenGL: %w", err)
 	}
 
 	renderer := &OpenGL3{
@@ -145,7 +145,8 @@ func (renderer *OpenGL3) Render(displaySize [2]float32, framebufferSize [2]float
 	gl.VertexAttribPointer(uint32(renderer.attribLocationColor), 4, gl.UNSIGNED_BYTE, true, int32(vertexSize), unsafe.Pointer(uintptr(vertexOffsetCol)))
 	indexSize := imgui.IndexBufferLayout()
 	drawType := gl.UNSIGNED_SHORT
-	if indexSize == 4 {
+	const bytesPerUint32 = 4
+	if indexSize == bytesPerUint32 {
 		drawType = gl.UNSIGNED_INT
 	}
 

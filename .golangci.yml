@@ -14,8 +14,8 @@ linters:
     - goimports # disabled because of so many false-positives with "imgui-go"
     - gosec
     - maligned
+    - gomnd # disabled as most OpenGL stuff are direct constants.
     - funlen # disabled because of example code. While people will probably tend to duplicate this, they'll handle it on their own.
-    - godox # for the deliberate TODO tags
     - wsl # this one became too pedantic and with a different style than I would.
 
 issues:
@@ -29,12 +29,3 @@ issues:
 linters-settings:
   lll:
     line-length: 160
-
-service:
-  golangci-lint-version: 1.21.x
-  prepare:
-    - apt-get update && apt-get install -y mesa-utils mesa-common-dev libsdl2-dev libglfw3-dev
-    # the following a fix as per https://github.com/golangci/golangci/issues/29#issuecomment-460649402 -- missing vendor libraries
-    - GO111MODULE=on go mod vendor
-    # the following a fix as per https://github.com/esimov/diagram/issues/7#issuecomment-443186458 -- glfw library broken through vendoring
-    - GO111MODULE=off go get -u github.com/go-gl/glfw/v3.2/glfw/glfw; cp -R $GOPATH/src/github.com/go-gl/glfw/v3.2/glfw/glfw vendor/github.com/go-gl/glfw/v3.2/glfw/glfw

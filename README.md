@@ -1,7 +1,7 @@
 # Examples of Dear ImGui for Go
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/inkyblackness/imgui-go-examples)](https://goreportcard.com/report/github.com/inkyblackness/imgui-go-examples)
-[![GolangCI](https://golangci.com/badges/github.com/inkyblackness/imgui-go-examples.svg)](https://golangci.com)
+[![Lint Status](https://github.com/inkyblackness/imgui-go-examples/workflows/golangci-lint/badge.svg)](https://github.com/inkyblackness/imgui-go-examples/actions)
 
 This project contains a set of [Go](https://www.golang.org) examples for [imgui-go](https://github.com/inkyblackness/imgui-go), which is a wrapper for [**Dear ImGui**](https://github.com/ocornut/imgui).
 
