@@ -118,7 +118,7 @@ func Run(p Platform, r Renderer) {
 			imgui.ShowDemoWindow(&showDemoWindow)
 		}
 		if showGoDemoWindow {
-			demo.ShowDemoWindow(&showGoDemoWindow)
+			demo.Show(&showGoDemoWindow)
 		}
 
 		// Rendering

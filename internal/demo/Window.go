@@ -10,11 +10,11 @@ var window = struct {
 	flags int
 }{}
 
-// ShowDemoWindow demonstrates most ImGui features that were ported to Go.
+// Show demonstrates most ImGui features that were ported to Go.
 // This function tries to recreate the original demo window as closely as possible.
 //
 // In theory, if both windows would provide the identical functionality, then the wrapper would be complete.
-func ShowDemoWindow(show *bool) {
+func Show(show *bool) {
 	open := show
 
 	imgui.SetNextWindowPosV(imgui.Vec2{X: 650, Y: 20}, imgui.ConditionFirstUseEver, imgui.Vec2{})
