@@ -71,7 +71,6 @@ func bulletText(text string) {
 //
 // In theory, if both windows would provide the identical functionality, then the wrapper would be complete.
 func Show(keepOpen *bool) {
-
 	imgui.SetNextWindowPosV(imgui.Vec2{X: 650, Y: 20}, imgui.ConditionFirstUseEver, imgui.Vec2{})
 	imgui.SetNextWindowSizeV(imgui.Vec2{X: 550, Y: 680}, imgui.ConditionFirstUseEver)
 
@@ -128,9 +127,7 @@ func Show(keepOpen *bool) {
 		showUserGuide()
 	}
 
-	if imgui.CollapsingHeader("Configuration") {
-
-	}
+	// MISSING: Configuration
 
 	if imgui.CollapsingHeader("Window options") {
 		imgui.Checkbox("No titlebar", &window.flags.noTitlebar)
@@ -196,6 +193,7 @@ type widgets struct {
 	radio         int
 }
 
+// nolint: nestif
 func (widgets *widgets) show() {
 	if !imgui.CollapsingHeader("Widgets") {
 		return
@@ -226,7 +224,6 @@ func (widgets *widgets) show() {
 
 		imgui.TreePop()
 	}
-
 }
 
 type layout struct {
