@@ -1,0 +1,16 @@
+name: golangci-lint
+on: [push, pull_request]
+jobs:
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download libraries
+        run: |
+          apt-get update && apt-get install -y mesa-utils mesa-common-dev libsdl2-dev libglfw3-dev
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v1
+        with:
+          version: v1.27
