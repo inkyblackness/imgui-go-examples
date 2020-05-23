@@ -47,6 +47,11 @@ type Renderer interface {
 	Render(displaySize [2]float32, framebufferSize [2]float32, drawData imgui.DrawData)
 }
 
+const (
+	millisPerSecond = 1000
+	sleepDuration   = time.Millisecond * 25
+)
+
 // Run implements the main program loop of the demo. It returns when the platform signals to stop.
 // This demo application shows some basic features of ImGui, as well as exposing the standard demo window.
 func Run(p Platform, r Renderer) {
@@ -54,7 +59,7 @@ func Run(p Platform, r Renderer) {
 
 	showDemoWindow := false
 	clearColor := [3]float32{0.0, 0.0, 0.0}
-	f := float32(0.0)
+	f := float32(0)
 	counter := 0
 	showAnotherWindow := false
 
@@ -83,7 +88,7 @@ func Run(p Platform, r Renderer) {
 			imgui.Text(fmt.Sprintf("counter = %d", counter))
 
 			imgui.Text(fmt.Sprintf("Application average %.3f ms/frame (%.1f FPS)",
-				1000.0/imgui.CurrentIO().Framerate(), imgui.CurrentIO().Framerate()))
+				millisPerSecond/imgui.CurrentIO().Framerate(), imgui.CurrentIO().Framerate()))
 		}
 
 		// 2. Show another simple window. In most cases you will use an explicit Begin/End pair to name your windows.
@@ -102,7 +107,9 @@ func Run(p Platform, r Renderer) {
 		if showDemoWindow {
 			// Normally user code doesn't need/want to call this because positions are saved in .ini file anyway.
 			// Here we just want to make the demo initial state a bit more friendly!
-			imgui.SetNextWindowPosV(imgui.Vec2{X: 650, Y: 20}, imgui.ConditionFirstUseEver, imgui.Vec2{})
+			const demoX = 650
+			const demoY = 20
+			imgui.SetNextWindowPosV(imgui.Vec2{X: demoX, Y: demoY}, imgui.ConditionFirstUseEver, imgui.Vec2{})
 
 			imgui.ShowDemoWindow(&showDemoWindow)
 		}
@@ -118,6 +125,6 @@ func Run(p Platform, r Renderer) {
 		p.PostRender()
 
 		// sleep to avoid 100% CPU usage for this demo
-		<-time.After(time.Millisecond * 25)
+		<-time.After(sleepDuration)
 	}
 }
