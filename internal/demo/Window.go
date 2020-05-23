@@ -2,11 +2,12 @@ package demo
 
 import (
 	"fmt"
-	"github.com/inkyblackness/imgui-go"
+
+	"github.com/inkyblackness/imgui-go/v2"
 )
 
-var demoWindow = struct {
-	windowFlags int
+var window = struct {
+	flags int
 }{}
 
 // ShowDemoWindow demonstrates most ImGui features that were ported to Go.
@@ -19,7 +20,7 @@ func ShowDemoWindow(show *bool) {
 	imgui.SetNextWindowPosV(imgui.Vec2{X: 650, Y: 20}, imgui.ConditionFirstUseEver, imgui.Vec2{})
 	imgui.SetNextWindowSizeV(imgui.Vec2{X: 550, Y: 680}, imgui.ConditionFirstUseEver)
 
-	if !imgui.BeginV("ImGui-Go Demo", open, demoWindow.windowFlags) {
+	if !imgui.BeginV("ImGui-Go Demo", open, window.flags) {
 		// Early out if the window is collapsed, as an optimization.
 		imgui.End()
 		return

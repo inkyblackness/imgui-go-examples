@@ -1,10 +1,12 @@
-package demo
+package example
 
 import (
 	"fmt"
 	"time"
 
 	"github.com/inkyblackness/imgui-go/v2"
+
+	"github.com/inkyblackness/imgui-go-examples/internal/demo"
 )
 
 // Platform covers mouse/keyboard/gamepad inputs, cursor shape, timing, windowing.
@@ -116,7 +118,7 @@ func Run(p Platform, r Renderer) {
 			imgui.ShowDemoWindow(&showDemoWindow)
 		}
 		if showGoDemoWindow {
-			ShowDemoWindow(&showGoDemoWindow)
+			demo.ShowDemoWindow(&showGoDemoWindow)
 		}
 
 		// Rendering
