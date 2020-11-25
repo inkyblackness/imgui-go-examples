@@ -12,6 +12,7 @@ linters:
   disable:
     - gochecknoglobals
     - goimports # disabled because of so many false-positives with "imgui-go"
+    - gofumpt # disabled because no extra need
     - gosec
     - maligned
     - gomnd # disabled as most OpenGL stuff are direct constants.
