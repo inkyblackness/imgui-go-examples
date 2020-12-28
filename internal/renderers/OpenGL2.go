@@ -5,7 +5,7 @@ import (
 	"unsafe"
 
 	"github.com/go-gl/gl/v2.1/gl"
-	"github.com/inkyblackness/imgui-go/v2"
+	"github.com/inkyblackness/imgui-go/v3"
 )
 
 // OpenGL2 implements a renderer based on github.com/go-gl/gl (v2.1).
