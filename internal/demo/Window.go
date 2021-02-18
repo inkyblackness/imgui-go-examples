@@ -58,6 +58,7 @@ var window = struct {
 	layout  layout
 	popups  popups
 	columns columns
+	tables  tables
 	misc    misc
 }{}
 
@@ -153,6 +154,7 @@ func Show(keepOpen *bool) {
 	window.layout.show()
 	window.popups.show()
 	window.columns.show()
+	window.tables.show()
 	window.misc.show()
 
 	// End of ShowDemoWindow()
@@ -222,6 +224,102 @@ func (widgets *widgets) show() {
 			widgets.radio = 2
 		}
 
+		imgui.TreePop()
+	}
+}
+
+type tables struct {
+	background     bool
+	borders        bool
+	noInnerBorders bool
+	header         bool
+}
+
+var demoTableHeader = []string{
+	"Name", "Favourite Food", "Favourite Colour",
+}
+
+var demoTable = [][]string{
+	{"Eric", "Bannana", "Yellow"},
+	{"Peter", "Apple", "Red"},
+	{"Bruce", "Liquorice", "Black"},
+	{"Aaron", "Chocolates", "Blue"},
+}
+
+func (tables *tables) show() {
+	if !imgui.CollapsingHeader("Tables") {
+		return
+	}
+
+	if imgui.TreeNode("Rows & Columns") {
+		if imgui.BeginTable("tableRowsAndColumns", 3) {
+			for row := 0; row < 4; row++ {
+				imgui.TableNextRow()
+				for column := 0; column < 3; column++ {
+					imgui.TableSetColumnIndex(column)
+					imgui.Text(fmt.Sprintf("Row %d Column %d", row, column))
+				}
+			}
+			imgui.EndTable()
+		}
+		imgui.TreePop()
+	}
+
+	if imgui.TreeNode("Options") {
+		// tables are useful for more than tabulated data. we use tables here
+		// to facilitate layout of the option checkboxes
+		if imgui.BeginTable("tableOptions", 2) {
+			imgui.TableNextRow()
+			if imgui.TableNextColumn() {
+				imgui.Checkbox("Background", &tables.background)
+			}
+			if imgui.TableNextColumn() {
+				imgui.Checkbox("Header Row", &tables.header)
+			}
+
+			imgui.TableNextRow()
+			if imgui.TableNextColumn() {
+				imgui.Checkbox("Borders", &tables.borders)
+			}
+			if tables.borders {
+				if imgui.TableNextColumn() {
+					imgui.Checkbox("No Inner Borders", &tables.noInnerBorders)
+				}
+			}
+
+			imgui.EndTable()
+		}
+
+		// set flags according to the options that have been selected
+		flgs := 0
+		if tables.background {
+			flgs |= imgui.TableFlagsRowBg
+		}
+		if tables.borders {
+			flgs |= imgui.TableFlagsBorders
+			if tables.noInnerBorders {
+				flgs |= imgui.TableFlagsNoBordersInBody
+			}
+		}
+
+		if imgui.BeginTableV("tableRowsAndColumns", len(demoTableHeader), flgs, imgui.Vec2{}, 0.0) {
+			if tables.header {
+				imgui.TableHeadersRow()
+				for column := 0; column < len(demoTableHeader); column++ {
+					imgui.TableSetColumnIndex(column)
+					imgui.Text(demoTableHeader[column])
+				}
+			}
+
+			for row := 0; row < len(demoTable); row++ {
+				imgui.TableNextRow()
+				for column := 0; column < len(demoTableHeader); column++ {
+					imgui.TableSetColumnIndex(column)
+					imgui.Text(demoTable[row][column])
+				}
+			}
+			imgui.EndTable()
+		}
 		imgui.TreePop()
 	}
 }
