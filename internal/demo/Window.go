@@ -3,7 +3,7 @@ package demo
 import (
 	"fmt"
 
-	"github.com/inkyblackness/imgui-go/v3"
+	"github.com/inkyblackness/imgui-go/v4"
 )
 
 type windowFlags struct {
@@ -18,8 +18,8 @@ type windowFlags struct {
 	noBringToFront bool
 }
 
-func (f windowFlags) combined() int {
-	flags := 0
+func (f windowFlags) combined() imgui.WindowFlags {
+	flags := imgui.WindowFlagsNone
 	if f.noTitlebar {
 		flags |= imgui.WindowFlagsNoTitleBar
 	}
@@ -291,7 +291,7 @@ func (tables *tables) show() {
 		}
 
 		// set flags according to the options that have been selected
-		flgs := 0
+		flgs := imgui.TableFlagsNone
 		if tables.background {
 			flgs |= imgui.TableFlagsRowBg
 		}
