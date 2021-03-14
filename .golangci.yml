@@ -13,10 +13,12 @@ linters:
   # and the remaining issues (if existing) aren't worth it.
   disable:
     - gochecknoglobals
+    - gocognit # disabled because of the high complexity of demo files
     - goimports # disabled because of so many false-positives with "imgui-go"
     - gofumpt # disabled because no extra need
     - gosec
     - maligned
+    - nestif # disabled because of the high complexity of demo files
     - gomnd # disabled as most OpenGL stuff are direct constants.
     - funlen # disabled because of example code. While people will probably tend to duplicate this, they'll handle it on their own.
     - wsl # this one became too pedantic and with a different style than I would.
