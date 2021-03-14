@@ -5,11 +5,21 @@ run:
     - sdl
 
 linters:
-  enable:
-    - whitespace
-    - godot
-    - godox
-    - golint
+  # Take an aggressive approach: enable everything and only disable if not useful.
+  # So far there are fewer to disable than to enable explicitly.
+  enable-all: true
+
+  # linters are disabled if their majority of issues is considered false-positive (intended code)
+  # and the remaining issues (if existing) aren't worth it.
+  disable:
+    - gochecknoglobals
+    - goimports # disabled because of so many false-positives with "imgui-go"
+    - gofumpt # disabled because no extra need
+    - gosec
+    - maligned
+    - gomnd # disabled as most OpenGL stuff are direct constants.
+    - funlen # disabled because of example code. While people will probably tend to duplicate this, they'll handle it on their own.
+    - wsl # this one became too pedantic and with a different style than I would.
 
 issues:
   exclude-use-default: false # disable filtering of defaults for better zero-issue policy
