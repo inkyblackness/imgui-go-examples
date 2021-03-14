@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/inkyblackness/imgui-go/v3"
+	"github.com/inkyblackness/imgui-go/v4"
 
 	"github.com/inkyblackness/imgui-go-examples/internal/example"
 	"github.com/inkyblackness/imgui-go-examples/internal/platforms"
