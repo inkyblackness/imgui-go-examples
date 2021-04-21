@@ -1,7 +1,7 @@
 package renderers
 
 import (
-	_ "embed"
+	_ "embed" // using embed for the shader sources
 	"fmt"
 	"unsafe"
 
