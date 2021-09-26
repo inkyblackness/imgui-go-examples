@@ -4,6 +4,9 @@ run:
     - glfw
     - sdl
 
+skip-dirs:
+  - internal/renderers/gl
+
 linters:
   # Take an aggressive approach: enable everything and only disable if not useful.
   # So far there are fewer to disable than to enable explicitly.

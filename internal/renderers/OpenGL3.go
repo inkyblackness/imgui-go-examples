@@ -4,7 +4,7 @@ import (
 	_ "embed" // using embed for the shader sources
 	"fmt"
 
-	"github.com/go-gl/gl/v3.2-core/gl"
+	"github.com/inkyblackness/imgui-go-examples/internal/renderers/gl/v3.2-core/gl"
 	"github.com/inkyblackness/imgui-go/v4"
 )
 

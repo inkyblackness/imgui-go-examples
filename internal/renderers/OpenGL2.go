@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/go-gl/gl/v2.1/gl"
+	"github.com/inkyblackness/imgui-go-examples/internal/renderers/gl/v2.1/gl"
 	"github.com/inkyblackness/imgui-go/v4"
 )
 
