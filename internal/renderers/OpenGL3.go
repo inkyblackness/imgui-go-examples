@@ -161,7 +161,6 @@ func (renderer *OpenGL3) Render(displaySize [2]float32, framebufferSize [2]float
 
 	// Draw
 	for _, list := range drawData.CommandLists() {
-
 		vertexBuffer, vertexBufferSize := list.VertexBuffer()
 		gl.BindBuffer(gl.ARRAY_BUFFER, renderer.vboHandle)
 		gl.BufferData(gl.ARRAY_BUFFER, vertexBufferSize, vertexBuffer, gl.STREAM_DRAW)
@@ -177,9 +176,9 @@ func (renderer *OpenGL3) Render(displaySize [2]float32, framebufferSize [2]float
 				gl.BindTexture(gl.TEXTURE_2D, uint32(cmd.TextureID()))
 				clipRect := cmd.ClipRect()
 				gl.Scissor(int32(clipRect.X), int32(fbHeight)-int32(clipRect.W), int32(clipRect.Z-clipRect.X), int32(clipRect.W-clipRect.Y))
-				gl.DrawElementsBaseVertexWithOffset(gl.TRIANGLES, int32(cmd.ElementCount()), uint32(drawType), uintptr(cmd.IndexOffset()*indexSize), int32(cmd.VertexOffset()))
+				gl.DrawElementsBaseVertexWithOffset(gl.TRIANGLES, int32(cmd.ElementCount()), uint32(drawType),
+					uintptr(cmd.IndexOffset()*indexSize), int32(cmd.VertexOffset()))
 			}
-
 		}
 	}
 	gl.DeleteVertexArrays(1, &vaoHandle)
