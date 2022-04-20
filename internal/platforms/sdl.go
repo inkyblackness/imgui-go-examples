@@ -147,7 +147,6 @@ func (platform *SDL) NewFrame() {
 // PostRender performs a buffer swap.
 func (platform *SDL) PostRender() {
 	platform.window.GLSwap()
-	imgui.UpdatePointers()
 }
 
 func (platform *SDL) setKeyMapping() {

@@ -130,7 +130,6 @@ func (platform *GLFW) NewFrame() {
 // PostRender performs a buffer swap.
 func (platform *GLFW) PostRender() {
 	platform.window.SwapBuffers()
-	imgui.UpdatePointers()
 }
 
 func (platform *GLFW) setKeyMapping() {

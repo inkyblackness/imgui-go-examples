@@ -192,7 +192,7 @@ func showUserGuide() {
 type widgets struct {
 	buttonClicked int
 	check         bool
-	radio         int
+	radio         int32
 }
 
 // nolint: nestif
