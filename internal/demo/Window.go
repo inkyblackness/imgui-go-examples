@@ -224,12 +224,11 @@ func (widgets *widgets) show() {
 			widgets.radio = 2
 		}
 
-		var c int
-		imgui.Combo("combo", &c, []string{
-			"first",
-			"second",
-			"car",
-		}, 0)
+		imgui.Combo("combo", &widgets.radio, []string{
+			"one item",
+			"two items",
+			"three items",
+		})
 
 		imgui.TreePop()
 	}
