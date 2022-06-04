@@ -192,7 +192,7 @@ func showUserGuide() {
 type widgets struct {
 	buttonClicked int
 	check         bool
-	radio         int
+	radio         int32
 }
 
 // nolint: nestif
@@ -223,6 +223,12 @@ func (widgets *widgets) show() {
 		if imgui.RadioButton("radio c", widgets.radio == 2) {
 			widgets.radio = 2
 		}
+
+		imgui.Combo("combo", &widgets.radio, []string{
+			"one item",
+			"two items",
+			"three items",
+		})
 
 		imgui.TreePop()
 	}
