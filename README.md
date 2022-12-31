@@ -3,6 +3,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/inkyblackness/imgui-go-examples)](https://goreportcard.com/report/github.com/inkyblackness/imgui-go-examples)
 [![Lint Status](https://github.com/inkyblackness/imgui-go-examples/workflows/golangci-lint/badge.svg)](https://github.com/inkyblackness/imgui-go-examples/actions)
 
+## Discontinued
+**This repository is no longer maintained as per 2022-12-31.
+Please refer to the README of the main repository for details and alternatives: https://github.com/inkyblackness/imgui-go .** 
+
+--
+
 This project contains a set of [Go](https://www.golang.org) examples for [imgui-go](https://github.com/inkyblackness/imgui-go), which is a wrapper for [**Dear ImGui**](https://github.com/ocornut/imgui).
 
 It provides reference implementations on how to use and integrate **Dear ImGui** in Go.
