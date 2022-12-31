@@ -16,7 +16,9 @@ jobs:
         with:
           go-version: '1.17.8'
           check-latest: false
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
-        with:
-          version: v1.44.2
+# Disabled because a "clean" build was not in store for archiving this repository.
+# Still, keeping the action "alive" as a shell, to showcase what would be necessary to build the programs.
+#      - name: golangci-lint
+#        uses: golangci/golangci-lint-action@v3
+#        with:
+#          version: v1.44.2
